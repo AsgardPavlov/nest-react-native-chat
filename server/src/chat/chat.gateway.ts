@@ -1,5 +1,4 @@
 import {
-  MessageBody,
   SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
@@ -45,8 +44,6 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
   @SubscribeMessage('sendMessage')
   async handleMessage(socket: Socket, newMessage: CreateMessageDto) {
-    console.log('createdMessage');
-
     if (!newMessage) return;
 
     const conversationId = socket.handshake.query.conversationId;
@@ -64,9 +61,4 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
       conversationId: createdMessage.conversation.id,
     });
   }
-
-  // @SubscribeMessage('newMessage')
-  // onNewMessage(@MessageBody() body: any) {
-  //   this.server.emit('newMessage', body);
-  // }
 }
