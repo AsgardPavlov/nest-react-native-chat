@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-// import { ChatGateway } from './chat.gateway';
+import { ChatGateway } from './chat.gateway';
 import { ChatController } from './chat.controller';
 import { ChatService } from './chat.service';
 import { ConversationEntity, MessageEntity } from 'shared/entites';
@@ -15,7 +15,7 @@ import {
   controllers: [ChatController],
   providers: [
     ChatService,
-    // ChatGateway,
+    ChatGateway,
     {
       provide: 'ConversationsRepositoryInterface',
       useClass: ConversationsRepository,

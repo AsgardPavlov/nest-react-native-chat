@@ -28,6 +28,7 @@ export class ChatService {
 
       return {
         id: conversation.id,
+        name: conversation.name,
         userEmails: uniqueUserEmailsArray,
       };
     });
