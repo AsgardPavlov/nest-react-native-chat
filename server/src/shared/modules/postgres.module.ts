@@ -12,7 +12,7 @@ import { ConversationEntity, MessageEntity } from 'shared/entites';
         password: process.env.POSTGRES_DB_PASSWORD,
         username: process.env.POSTGRES_DB_USERNAME,
         database: process.env.POSTGRES_DB_NAME,
-        synchronize: true,
+        synchronize: true, // TODO development only
         logging: true,
         entities: [ConversationEntity, MessageEntity],
       }),
