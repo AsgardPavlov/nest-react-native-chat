@@ -2,14 +2,14 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import Home from "./src/screens/Home";
+import BottomNavigationBar from "./src/layout/BottomNavigationBar";
 import { LightTheme } from "./src/styles/theme";
 
 const Stack = createNativeStackNavigator();
 
 const routes = {
-  Home: {
-    component: Home,
+  Main: {
+    component: BottomNavigationBar,
     options: { headerShown: false }
   }
 };
