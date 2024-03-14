@@ -4,19 +4,20 @@ import {
 } from "react-native-heroicons/outline";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useTheme } from "@react-navigation/native";
-import Chats from "screens/Home";
+import Chats from "screens/Chats";
 import Home from "screens/Home";
 import { Colors } from "styles/colors";
+import { RootStackParamList } from "types/screens";
 import { fontPixel } from "utils/font-size-helper";
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<RootStackParamList>();
 
 const BottomNavigationBar = () => {
   const theme = useTheme();
 
   return (
     <Tab.Navigator
-      initialRouteName="Chats"
+      initialRouteName="Home"
       screenOptions={() => ({
         tabBarActiveTintColor: theme.colors.primary,
         tabBarInactiveTintColor: Colors.GRAY,
