@@ -1,10 +1,9 @@
 import { useCallback } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import { StatusBar } from "expo-status-bar";
 
-import { commonStyles } from "./src/styles/common";
+import Router from "./Router";
 
 export default function App() {
   const [fontsLoaded, fontError] = useFonts({
@@ -23,21 +22,11 @@ export default function App() {
   }
 
   return (
-    <View
-      style={styles.container}
+    <SafeAreaProvider
+      style={{ flex: 1 }}
       onLayout={onLayoutRootView}
     >
-      <Text style={[commonStyles.defaultFont]}>Hey, there!</Text>
-      <StatusBar style="auto" />
-    </View>
+      <Router />
+    </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
