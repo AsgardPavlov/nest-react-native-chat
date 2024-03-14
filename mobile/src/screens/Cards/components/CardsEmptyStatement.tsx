@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     fontSize: fontPixel(40)
   },
   text: {
+    ...commonStyles.defaultFont,
     fontSize: fontSize.medium,
     textAlign: "center"
   },
