@@ -9,8 +9,14 @@ export const commonStyles = StyleSheet.create({
   defaultFontBold: {
     fontFamily: "FC-Subject-Rounded-Bold"
   },
+  fontHelvetica: {
+    fontFamily: "Helvetica"
+  },
+  flex: {
+    flex: 1
+  },
   screenHorizontalPadding: {
-    paddingHorizontal: 21.5
+    paddingHorizontal: 20
   },
   screenVerticalPadding: {
     paddingTop: 14,

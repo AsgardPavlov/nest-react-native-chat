@@ -25,7 +25,7 @@ export const fontPixel = (size: number) => {
 };
 
 export const fontSize = {
-  mini: fontPixel(12),
+  mini: fontPixel(13),
   small: fontPixel(15),
   medium: fontPixel(18),
   large: fontPixel(20),

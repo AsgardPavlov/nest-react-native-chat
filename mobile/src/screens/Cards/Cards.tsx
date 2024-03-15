@@ -1,10 +1,19 @@
 import { StyleSheet } from "react-native";
 import ScreenWrapper from "components/ScreenWrapper";
+import { useOmise } from "contexts/OmiseProvider";
+import { card } from "types/generated";
 
 import CardsEmptyStatement from "./components/CardsEmptyStatement";
+import CardsList from "./components/CardsList";
 
 const Cards = () => {
-  return (
+  const { customer } = useOmise();
+
+  const showCardsList = !!customer?.cards?.total && !!customer?.cards.data;
+
+  return showCardsList ? (
+    <CardsList list={customer?.cards?.data as card[]} />
+  ) : (
     <ScreenWrapper
       withScrollView={false}
       style={styles.container}
