@@ -43,7 +43,7 @@ export default function ScreenWrapper({
           {...rest}
           contentContainerStyle={[
             contentContainerStyle,
-            commonStyles.defaultHorizontalPadding
+            commonStyles.screenHorizontalPadding
           ]}
           keyboardShouldPersistTaps="always"
           alwaysBounceVertical={false}
@@ -54,7 +54,7 @@ export default function ScreenWrapper({
         </ScrollView>
       ) : (
         <View
-          style={[containerStyle, commonStyles.defaultHorizontalPadding, style]}
+          style={[containerStyle, commonStyles.screenHorizontalPadding, style]}
         >
           {children}
         </View>
