@@ -3,6 +3,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 
+import { ReactQueryClientProvider } from "./src/contexts/ReactQueryProvider";
 import Router from "./Router";
 
 export default function App() {
@@ -22,11 +23,13 @@ export default function App() {
   }
 
   return (
-    <SafeAreaProvider
-      style={{ flex: 1 }}
-      onLayout={onLayoutRootView}
-    >
-      <Router />
-    </SafeAreaProvider>
+    <ReactQueryClientProvider>
+      <SafeAreaProvider
+        style={{ flex: 1 }}
+        onLayout={onLayoutRootView}
+      >
+        <Router />
+      </SafeAreaProvider>
+    </ReactQueryClientProvider>
   );
 }
