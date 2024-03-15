@@ -5,5 +5,6 @@ export const Colors = {
   PALE: "#cdcdcd",
   LIGHT_PALE: "#e6e3e6",
   GRAY: "#808080",
-  LIGHT_GRAY: "#8f8f8f"
+  LIGHT_GRAY: "#8f8f8f",
+  ERROR: "#ff0000"
 };
