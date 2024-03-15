@@ -5,7 +5,7 @@ import { OmiseErrorResponse } from "types/omise";
 import { omiseAxiosInstance } from "utils/axios-instances";
 
 export default function useRetrieveCustomer(
-  customerId: string
+  customerId: string | null
 ): UseQueryResult<AxiosResponse<customer>, AxiosError<OmiseErrorResponse>> {
   const queryFn = (): Promise<AxiosResponse<customer>> => {
     return omiseAxiosInstance.get(`/customers/${customerId}`);
