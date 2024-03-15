@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StatusBar, StyleSheet } from "react-native";
 
 import { Colors } from "./colors";
 
@@ -9,10 +9,14 @@ export const commonStyles = StyleSheet.create({
   defaultFontBold: {
     fontFamily: "FC-Subject-Rounded-Bold"
   },
-  defaultHorizontalPadding: {
+  screenHorizontalPadding: {
     paddingHorizontal: 21.5
   },
-  defaultShadow: {
+  screenVerticalPadding: {
+    paddingTop: 14,
+    paddingBottom: 14
+  },
+  cardShadow: {
     backgroundColor: Colors.WHITE,
     shadowColor: Colors.BLACK,
     shadowOffset: {
@@ -23,7 +27,7 @@ export const commonStyles = StyleSheet.create({
     shadowRadius: 20,
     elevation: 5 // This is for Android, as it doesn't support shadow properties
   },
-  borderRadius: {
+  cardBorderRadius: {
     borderRadius: 13
   }
 });

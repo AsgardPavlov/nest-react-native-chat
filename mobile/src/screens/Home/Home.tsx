@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
 
     paddingVertical: 32,
     paddingHorizontal: 16,
-    ...commonStyles.defaultShadow,
-    ...commonStyles.borderRadius
+    ...commonStyles.cardShadow,
+    ...commonStyles.cardBorderRadius
   },
   cardTitle: {
     fontSize: fontSize.large
