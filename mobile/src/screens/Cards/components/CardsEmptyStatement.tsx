@@ -1,9 +1,25 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { SheetManager } from "react-native-actions-sheet";
+import { useNavigation } from "@react-navigation/native";
+import { useOmise } from "contexts/OmiseProvider";
 import { Colors } from "styles/colors";
 import { commonStyles } from "styles/common";
+import { NavigationProps } from "types/screens";
 import { fontPixel, fontSize } from "utils/font-size-helper";
 
 const CardsEmptyStatement = () => {
+  const navigation = useNavigation<NavigationProps>();
+
+  const { customer } = useOmise();
+
+  const handleAddNewCard = () => {
+    if (customer) {
+      navigation.navigate("AddCard");
+    } else {
+      SheetManager.show("CreateCustomerSheet");
+    }
+  };
+
   return (
     <View style={styles.textContainer}>
       <Text style={styles.cardEmoji}>💳</Text>
@@ -12,14 +28,12 @@ const CardsEmptyStatement = () => {
         We recommend adding a card for easy payment
       </Text>
 
-      <TouchableOpacity onPress={() => {}}>
+      <TouchableOpacity onPress={handleAddNewCard}>
         <Text style={styles.actionText}>Add New Card</Text>
       </TouchableOpacity>
     </View>
   );
 };
-
-export default CardsEmptyStatement;
 
 const styles = StyleSheet.create({
   textContainer: {
@@ -43,3 +57,5 @@ const styles = StyleSheet.create({
     fontSize: fontSize.medium
   }
 });
+
+export default CardsEmptyStatement;

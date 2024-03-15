@@ -3,7 +3,9 @@ import useRetrieveCustomer from "hooks/omise/useRetrieveCustomer";
 import { customer } from "types/generated";
 
 interface OmiseContextProps {
+  setCustomerId: React.Dispatch<React.SetStateAction<string | null>>;
   customer: customer | undefined;
+  isLoading: boolean;
 }
 
 export const OmiseContext = createContext<OmiseContextProps>(
@@ -24,7 +26,9 @@ export const OmiseProvider = ({ children }: { children: React.ReactNode }) => {
   const { data, isLoading } = useRetrieveCustomer(customerId);
 
   const value = {
-    customer: data?.data
+    setCustomerId,
+    customer: data?.data,
+    isLoading
   };
 
   return (

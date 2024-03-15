@@ -1,10 +1,15 @@
+import "./src/sheets";
+
 import { useCallback } from "react";
+import { SheetProvider } from "react-native-actions-sheet";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 
 import { OmiseProvider } from "./src/contexts/OmiseProvider";
 import { ReactQueryClientProvider } from "./src/contexts/ReactQueryProvider";
+import { LightTheme } from "./src/styles/theme";
 import Router from "./Router";
 
 export default function App() {
@@ -31,7 +36,11 @@ export default function App() {
           style={{ flex: 1 }}
           onLayout={onLayoutRootView}
         >
-          <Router />
+          <NavigationContainer theme={LightTheme}>
+            <SheetProvider>
+              <Router />
+            </SheetProvider>
+          </NavigationContainer>
         </SafeAreaProvider>
       </OmiseProvider>
     </ReactQueryClientProvider>
