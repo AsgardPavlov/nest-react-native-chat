@@ -1,9 +1,10 @@
 import React, { createContext, useContext, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import useRetrieveCustomer from "hooks/omise/useRetrieveCustomer";
 import { customer } from "types/generated";
 
 interface OmiseContextProps {
-  setCustomerId: React.Dispatch<React.SetStateAction<string | null>>;
+  handleSetCustomerId: (customerId: string) => void;
   customer: customer | undefined;
   isCustomerLoading: boolean;
   refetchCutomer: () => void;
@@ -21,14 +22,25 @@ export function useOmise() {
   return context;
 }
 
-export const OmiseProvider = ({ children }: { children: React.ReactNode }) => {
-  const [customerId, setCustomerId] = useState<string | null>(null);
-
+export const OmiseProvider = ({
+  customerId,
+  setCustomerId,
+  children
+}: {
+  customerId: string | null;
+  setCustomerId: React.Dispatch<React.SetStateAction<string | null>>;
+  children: React.ReactNode;
+}) => {
   const { data, refetch, isLoading, isRefetching, isFetching } =
-    useRetrieveCustomer(customerId || "cust_test_5z3cnrhw24wtgolf6s6");
+    useRetrieveCustomer(customerId);
+
+  const handleSetCustomerId = async (customerId: string) => {
+    await AsyncStorage.setItem("customerId", customerId);
+    setCustomerId(customerId);
+  };
 
   const value = {
-    setCustomerId,
+    handleSetCustomerId,
     customer: data?.data,
     isCustomerLoading: isLoading || isRefetching || isFetching,
     refetchCutomer: refetch

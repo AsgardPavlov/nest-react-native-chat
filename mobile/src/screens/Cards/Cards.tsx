@@ -1,13 +1,15 @@
-import { StyleSheet } from "react-native";
+import { ActivityIndicator, StyleSheet } from "react-native";
 import ScreenWrapper from "components/ScreenWrapper";
 import { useOmise } from "contexts/OmiseProvider";
 import { card } from "types/generated";
+
+import { Colors } from "../../styles/colors";
 
 import CardsEmptyStatement from "./components/CardsEmptyStatement";
 import CardsList from "./components/CardsList";
 
 const Cards = () => {
-  const { customer } = useOmise();
+  const { customer, isCustomerLoading } = useOmise();
 
   const showCardsList = !!customer?.cards?.total && !!customer?.cards.data;
 
@@ -18,7 +20,11 @@ const Cards = () => {
       withScrollView={false}
       style={styles.container}
     >
-      <CardsEmptyStatement />
+      {isCustomerLoading ? (
+        <ActivityIndicator color={Colors.PRIMARY} />
+      ) : (
+        <CardsEmptyStatement />
+      )}
     </ScreenWrapper>
   );
 };

@@ -1,9 +1,10 @@
 import "./src/sheets";
 
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { SheetProvider } from "react-native-actions-sheet";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
@@ -20,7 +21,12 @@ export default function App() {
     Helvetica: require("./assets/fonts/Helvetica.ttf")
   });
 
+  const [customerId, setCustomerId] = useState<null | string>(null);
+
   const onLayoutRootView = useCallback(async () => {
+    const initialCustomerId = await AsyncStorage.getItem("customerId");
+    setCustomerId(initialCustomerId);
+
     if (fontsLoaded || fontError) {
       await SplashScreen.hideAsync();
     }
@@ -32,7 +38,10 @@ export default function App() {
 
   return (
     <ReactQueryClientProvider>
-      <OmiseProvider>
+      <OmiseProvider
+        customerId={customerId}
+        setCustomerId={setCustomerId}
+      >
         <SafeAreaProvider
           style={{ flex: 1 }}
           onLayout={onLayoutRootView}

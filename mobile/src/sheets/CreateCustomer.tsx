@@ -27,7 +27,7 @@ interface FormValues {
 const CreateCustomer = () => {
   const navigation = useNavigation<NavigationProps>();
 
-  const { setCustomerId, isCustomerLoading } = useOmise();
+  const { handleSetCustomerId, isCustomerLoading } = useOmise();
 
   const createCustomerMutation = useCreateCustomer();
 
@@ -51,7 +51,7 @@ const CreateCustomer = () => {
         });
       },
       onSuccess: (res) => {
-        setCustomerId(res.data.id as string);
+        handleSetCustomerId(res.data.id as string);
         SheetManager?.hide("CreateCustomerSheet");
         navigation.navigate("AddCard");
         Toast.show({
