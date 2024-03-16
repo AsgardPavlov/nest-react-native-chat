@@ -3,6 +3,7 @@ import "./src/sheets";
 import { useCallback } from "react";
 import { SheetProvider } from "react-native-actions-sheet";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import Toast from "react-native-toast-message";
 import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
@@ -39,6 +40,7 @@ export default function App() {
           <NavigationContainer theme={LightTheme}>
             <SheetProvider>
               <Router />
+              <Toast />
             </SheetProvider>
           </NavigationContainer>
         </SafeAreaProvider>

@@ -9,7 +9,7 @@ const Home = ({
   navigation
 }: NativeStackScreenProps<RootStackParamList, "Home">) => {
   return (
-    <ScreenWrapper>
+    <ScreenWrapper withScrollView={false}>
       <View style={[styles.card]}>
         <Text
           style={[commonStyles.defaultFontBold, styles.cardTitle]}

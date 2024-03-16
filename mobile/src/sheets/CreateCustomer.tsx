@@ -27,7 +27,7 @@ interface FormValues {
 const CreateCustomer = () => {
   const navigation = useNavigation<NavigationProps>();
 
-  const { setCustomerId, isLoading } = useOmise();
+  const { setCustomerId, isCustomerLoading } = useOmise();
 
   const createCustomerMutation = useCreateCustomer();
 
@@ -122,7 +122,7 @@ const CreateCustomer = () => {
         <PrimaryButton
           title="Create"
           onPress={handleSubmit(onSubmit)}
-          loading={createCustomerMutation.isPending || isLoading}
+          loading={createCustomerMutation.isPending || isCustomerLoading}
         />
       </View>
     </DefaultActionSheet>
