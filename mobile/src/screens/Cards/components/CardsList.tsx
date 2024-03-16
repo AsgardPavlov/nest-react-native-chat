@@ -20,7 +20,8 @@ const CardsList = ({ list }: CardsListProps) => {
       style={[commonStyles.flex]}
       contentContainerStyle={[
         commonStyles.screenVerticalPadding,
-        commonStyles.screenHorizontalPadding
+        commonStyles.screenHorizontalPadding,
+        { gap: 22 }
       ]}
       keyExtractor={(item) => item.id as string}
       renderItem={({ item }) => <Card card={item} />}

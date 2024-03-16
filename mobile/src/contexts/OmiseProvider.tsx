@@ -25,7 +25,7 @@ export const OmiseProvider = ({ children }: { children: React.ReactNode }) => {
   const [customerId, setCustomerId] = useState<string | null>(null);
 
   const { data, refetch, isLoading, isRefetching, isFetching } =
-    useRetrieveCustomer(customerId);
+    useRetrieveCustomer(customerId || "cust_test_5z3cnrhw24wtgolf6s6");
 
   const value = {
     setCustomerId,

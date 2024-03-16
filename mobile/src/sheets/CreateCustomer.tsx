@@ -49,12 +49,12 @@ const CreateCustomer = () => {
       },
       onSuccess: (res) => {
         setCustomerId(res.data.id as string);
-        SheetManager.hide("CreateCustomerSheet");
+        SheetManager?.hide("CreateCustomerSheet");
+        navigation.navigate("AddCard");
         Toast.show({
           type: "success",
           text1: "Account successfully created"
         });
-        navigation.navigate("AddCard");
       }
     });
   };

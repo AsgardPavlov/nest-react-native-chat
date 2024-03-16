@@ -20,7 +20,7 @@ export const omiseAxiosInstance = axios.create({
 export const omiseVaultAxiosInstance = axios.create({
   baseURL: process.env.EXPO_PUBLIC_OMISE_VAULT_API_URL as string,
   headers: {
-    "Content-Type": "application/json",
+    "Content-Type": "application/x-www-form-urlencoded",
     Authorization: `Basic ${encodedOmisePublicKey}`
   },
   withCredentials: true

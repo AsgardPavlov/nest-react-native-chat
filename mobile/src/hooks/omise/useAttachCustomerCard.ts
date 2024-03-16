@@ -31,9 +31,9 @@ export default function useAttachCustomerCard(): UseMutationResult<
 
   return useMutation({
     mutationFn,
-    onSuccess: (res) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["omiseCustomer", res.data.id]
+        queryKey: ["omiseCustomer"]
       });
     }
   });

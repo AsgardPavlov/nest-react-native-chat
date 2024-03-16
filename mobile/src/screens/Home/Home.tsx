@@ -1,23 +1,25 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import PrimaryButton from "components/PrimaryButton";
 import ScreenWrapper from "components/ScreenWrapper";
-import { commonStyles } from "styles/common";
+import { useOmise } from "contexts/OmiseProvider";
 import { RootStackParamList } from "types/screens";
-import { fontSize } from "utils/font-size-helper";
 
 const Home = ({
   navigation
 }: NativeStackScreenProps<RootStackParamList, "Home">) => {
+  const { isCustomerLoading } = useOmise();
+
   return (
-    <ScreenWrapper withScrollView={false}>
-      <View style={[styles.card]}>
-        <Text
-          style={[commonStyles.defaultFontBold, styles.cardTitle]}
-          onPress={() => navigation.navigate("Cards")}
-        >
-          Cards
-        </Text>
-      </View>
+    <ScreenWrapper
+      withScrollView={false}
+      style={styles.container}
+    >
+      <PrimaryButton
+        title="Go to Cards"
+        loading={isCustomerLoading}
+        onPress={() => navigation.navigate("Cards")}
+      />
     </ScreenWrapper>
   );
 };
@@ -27,19 +29,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center"
-  },
-  card: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-
-    paddingVertical: 32,
-    paddingHorizontal: 16,
-    ...commonStyles.cardShadow,
-    ...commonStyles.cardBorderRadius
-  },
-  cardTitle: {
-    fontSize: fontSize.large
   }
 });
 

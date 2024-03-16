@@ -19,11 +19,12 @@ import * as yup from "yup";
 const validationSchema = yup.object().shape({
   cardName: yup.string().required("Card name is required"),
   cardNumber: yup
-    .number()
+    .string()
     .required("Card number is required")
-    .min(100000000000, "Card number must be 16 digits")
-    // eslint-disable-next-line @typescript-eslint/no-loss-of-precision
-    .max(9999999999999999, "Card number must be 16 digits"),
+    .matches(
+      /^\d{4} \d{4} \d{4} \d{4}$/,
+      "Card number must be in the format 0000 0000 0000 0000"
+    ),
   cardSecurityCode: yup
     .number()
     .required("CVV is required")
@@ -37,7 +38,7 @@ const validationSchema = yup.object().shape({
 
 interface FormValues {
   cardName: string;
-  cardNumber: number;
+  cardNumber: string;
   cardSecurityCode: number;
   expiryDate: string;
 }
@@ -74,7 +75,9 @@ const AddCard = () => {
     const splittedExpiryDate = formValues.expiryDate.split("/");
 
     const createCardTokenPayload = {
-      ...formValues,
+      cardName: formValues.cardName,
+      cardNumber: parseInt(formValues.cardNumber.replace(/\s/g, "")),
+      cardSecurityCode: formValues.cardSecurityCode,
       cardExpirationMonth: Number(splittedExpiryDate[0]),
       cardExpirationYear: Number(
         `${new Date().getFullYear().toString().slice(0, 2)}${splittedExpiryDate[1]}`
@@ -94,11 +97,27 @@ const AddCard = () => {
           onError: (error) =>
             handleMutationError("Card attaching to customer error", error),
           onSuccess: () => {
-            navigation.navigate("Home");
+            navigation.navigate("Cards");
           }
         });
       }
     });
+  };
+
+  const formatCardNumber = (value: string) => {
+    const digits = value.replace(/\D/g, "");
+
+    return digits.replace(/(\d{4})/g, "$1 ").trim();
+  };
+
+  const formatExpiryDate = (value: string) => {
+    const digits = value.replace(/\D/g, "");
+
+    return digits.replace(/(\d{2})(\d{2})/, "$1/$2");
+  };
+
+  const formatCVV = (value: string) => {
+    return value.replace(/\D/g, "");
   };
 
   return (
@@ -111,7 +130,10 @@ const AddCard = () => {
               <TextInput
                 label="ATM/Debit/Credit card number"
                 placeholder="0000 0000 0000 0000"
-                onChangeText={onChange}
+                onChangeText={(value) => {
+                  const formattedValue = formatCardNumber(value);
+                  onChange(formattedValue);
+                }}
                 onBlur={onBlur}
                 value={value ? String(value) : undefined}
                 error={errors.cardNumber?.message}
@@ -148,7 +170,10 @@ const AddCard = () => {
                 <TextInput
                   label="Expiry Date"
                   placeholder="MM/YY"
-                  onChangeText={onChange}
+                  onChangeText={(value) => {
+                    const formattedValue = formatExpiryDate(value);
+                    onChange(formattedValue);
+                  }}
                   onBlur={onBlur}
                   value={value}
                   error={errors.expiryDate?.message}
@@ -166,7 +191,10 @@ const AddCard = () => {
                 <TextInput
                   label="CVV"
                   placeholder="123"
-                  onChangeText={onChange}
+                  onChangeText={(value) => {
+                    const formattedValue = formatCVV(value);
+                    onChange(formattedValue);
+                  }}
                   onBlur={onBlur}
                   value={value ? String(value) : undefined}
                   error={errors.cardSecurityCode?.message}

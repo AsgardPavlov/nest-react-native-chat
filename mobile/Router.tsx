@@ -60,7 +60,7 @@ const Router = () => {
         headerShadowVisible: false,
         contentStyle: {
           paddingTop: 17,
-          paddingBottom: 17
+          paddingBottom: route.name !== "Main" ? 17 : 0
         }
       })}
     >
