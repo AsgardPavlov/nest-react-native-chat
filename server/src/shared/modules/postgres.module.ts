@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConversationEntity, MessageEntity } from 'chat/entites';
+import { MessageEntity } from 'chat/entites';
 
 @Module({
   imports: [
@@ -14,7 +14,7 @@ import { ConversationEntity, MessageEntity } from 'chat/entites';
         database: process.env.POSTGRES_DB_NAME,
         synchronize: true, // development mode only
         logging: true,
-        entities: [ConversationEntity, MessageEntity],
+        entities: [MessageEntity],
       }),
     }),
   ],

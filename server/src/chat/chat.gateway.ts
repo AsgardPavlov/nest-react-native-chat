@@ -21,49 +21,32 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   async handleConnection(socket: Socket) {
     console.log(`Client connected: ${socket.id}`);
 
-    const userEmail = socket.handshake.headers.authorization ?? null;
-    if (!userEmail) {
-      this.handleDisconnect(socket);
-      return;
-    }
-
-    socket.data.userEmail = userEmail;
-
-    await this.getConversations(socket);
+    await this.getMessages(socket);
   }
 
   async handleDisconnect(socket: Socket) {
     console.log(`Client disconnected: ${socket.id}`);
   }
 
-  @SubscribeMessage('getConversations')
-  async getConversations(socket: Socket) {
-    const conversations = await this.chatService.getConversations();
+  @SubscribeMessage('getMessages')
+  async getMessages(socket: Socket) {
+    const messages = await this.chatService.getMessages();
 
-    this.server.to(socket.id).emit('getAllConversations', conversations);
+    this.server.to(socket.id).emit('getAllMessages', messages);
   }
 
   @SubscribeMessage('sendMessage')
   async handleMessage(socket: Socket, newMessage: CreateMessageDto) {
-    if (!newMessage || !newMessage.userEmail || !newMessage.message) {
+    if (!newMessage || !newMessage.username || !newMessage.message) {
       throw new WsException('Message content is required');
     }
 
-    const conversationId = socket.handshake.query.conversationId;
+    const createdMessage = await this.chatService.createMessage(newMessage);
 
-    if (typeof conversationId !== 'string') {
-      throw new WsException('Conversation ID must be a string');
-    }
-
-    const createdMessage = await this.chatService.createMessage(
-      conversationId,
-      newMessage,
-    );
-
-    this.server.emit(`newMessage-${conversationId}`, {
+    this.server.emit(`newMessage`, {
       id: createdMessage.id,
+      username: createdMessage.username,
       message: createdMessage.message,
-      conversationId: createdMessage.conversation.id,
     });
   }
 }
