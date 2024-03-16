@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { BaseAbstractRepository } from './base.abstract.repository';
-import { MessageEntity } from 'shared/entites';
-import { MessagesRepositoryInterface } from 'shared/interfaces';
+import { MessageEntity } from 'chat/entites';
+import { BaseAbstractRepository } from 'shared/repositories';
+import { MessagesRepositoryInterface } from 'chat/interfaces/messages.repository.interface';
 
 @Injectable()
 export class MessagesRepository

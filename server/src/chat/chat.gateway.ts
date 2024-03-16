@@ -4,6 +4,7 @@ import {
   WebSocketServer,
   OnGatewayConnection,
   OnGatewayDisconnect,
+  WsException,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 
@@ -44,18 +45,22 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
   @SubscribeMessage('sendMessage')
   async handleMessage(socket: Socket, newMessage: CreateMessageDto) {
-    if (!newMessage) return;
+    if (!newMessage || !newMessage.userEmail || !newMessage.message) {
+      throw new WsException('Message content is required');
+    }
 
     const conversationId = socket.handshake.query.conversationId;
 
-    if (typeof conversationId !== 'string') return;
+    if (typeof conversationId !== 'string') {
+      throw new WsException('Conversation ID must be a string');
+    }
 
     const createdMessage = await this.chatService.createMessage(
       conversationId,
       newMessage,
     );
 
-    this.server.emit('newMessage', {
+    this.server.emit(`newMessage-${conversationId}`, {
       id: createdMessage.id,
       message: createdMessage.message,
       conversationId: createdMessage.conversation.id,

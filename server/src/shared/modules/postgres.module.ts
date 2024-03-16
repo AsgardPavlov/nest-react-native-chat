@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConversationEntity, MessageEntity } from 'shared/entites';
+import { ConversationEntity, MessageEntity } from 'chat/entites';
 
 @Module({
   imports: [
@@ -12,7 +12,7 @@ import { ConversationEntity, MessageEntity } from 'shared/entites';
         password: process.env.POSTGRES_DB_PASSWORD,
         username: process.env.POSTGRES_DB_USERNAME,
         database: process.env.POSTGRES_DB_NAME,
-        synchronize: true, // TODO development only
+        synchronize: true, // development mode only
         logging: true,
         entities: [ConversationEntity, MessageEntity],
       }),

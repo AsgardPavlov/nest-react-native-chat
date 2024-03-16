@@ -1,10 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
 
-import {
-  ConversationsRepositoryInterface,
-  MessagesRepositoryInterface,
-} from 'shared/interfaces';
 import { CreateMessageDto } from './dtos/CreateMessage.dto';
+import { ConversationsRepositoryInterface } from './interfaces/conversations.repository.interface';
+import { MessagesRepositoryInterface } from './interfaces/messages.repository.interface';
 
 @Injectable()
 export class ChatService {
