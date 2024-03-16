@@ -12,3 +12,44 @@ services:
       - '15672:15672'
     env_file:
       - .env
+
+  backend:
+    build:
+      context: ./
+      dockerfile: ./apps/backend/Dockerfile
+    ports:
+      - '3000:3000'
+    env_file:
+      - .env
+    depends_on:
+      - rabbitmq
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    command: npm run start:dev api
+
+  chat:
+    build:
+      context: ./
+      dockerfile: ./apps/chat/Dockerfile
+    ports:
+      - '3001:3001'
+    env_file:
+      - .env
+    depends_on:
+      - rabbitmq
+      - postgres
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    command: npm run start:dev chat
+
+  postgres:
+    image: postgres
+    env_file:
+      - .env
+    ports:
+      - '5555:5555'
+    volumes:
+      - ./db/data:/var/lib/postgresql/data
+
