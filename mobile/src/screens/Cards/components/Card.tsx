@@ -1,4 +1,11 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  View
+} from "react-native";
+import { SheetManager } from "react-native-actions-sheet";
 import { Colors } from "styles/colors";
 import { commonStyles } from "styles/common";
 import { card } from "types/generated";
@@ -11,44 +18,56 @@ interface CardProps {
 const Card = ({ card }: CardProps) => {
   const cardNumberStyles = [styles.cardNumberDot, commonStyles.fontHelvetica];
 
+  const handlePress = () => {
+    SheetManager?.show("CreateChargeSheet", {
+      payload: {
+        cardId: card.id as string
+      }
+    });
+  };
+
   return (
-    <View
+    <TouchableHighlight
+      onPress={handlePress}
+      underlayColor={Colors.LIGHT_PALE}
       style={[
         styles.card,
         commonStyles.cardShadow,
         commonStyles.cardBorderRadius
       ]}
     >
-      <Image source={require("images/visa.png")} />
+      <>
+        <Image source={require("images/visa.png")} />
 
-      <View style={styles.cardNumberContainer}>
-        <Text style={cardNumberStyles}>••••</Text>
-        <Text style={cardNumberStyles}>••••</Text>
-        <Text style={cardNumberStyles}>••••</Text>
+        <View style={styles.cardNumberContainer}>
+          <Text style={cardNumberStyles}>••••</Text>
+          <Text style={cardNumberStyles}>••••</Text>
+          <Text style={cardNumberStyles}>••••</Text>
 
-        <Text style={[styles.cardLastDigits, commonStyles.defaultFont]}>
-          {card.last_digits}
-        </Text>
-      </View>
+          <Text style={[styles.cardLastDigits, commonStyles.defaultFont]}>
+            {card.last_digits}
+          </Text>
+        </View>
 
-      <View style={styles.container}>
-        <Text style={[styles.description, commonStyles.defaultFont]}>
-          Name on Card
-        </Text>
-        <Text style={[styles.description, commonStyles.defaultFont]}>
-          Expires
-        </Text>
-      </View>
+        <View style={styles.container}>
+          <Text style={[styles.description, commonStyles.defaultFont]}>
+            Name on Card
+          </Text>
+          <Text style={[styles.description, commonStyles.defaultFont]}>
+            Expires
+          </Text>
+        </View>
 
-      <View style={styles.container}>
-        <Text style={[styles.cardInfo, commonStyles.defaultFont]}>
-          {card.name}
-        </Text>
-        <Text style={[styles.cardInfo, commonStyles.defaultFont]}>
-          {`${card.expiration_month}/${(card.expiration_year as number) % 100}`}
-        </Text>
-      </View>
-    </View>
+        <View style={styles.container}>
+          <Text style={[styles.cardInfo, commonStyles.defaultFont]}>
+            {card.name}
+          </Text>
+          <Text style={[styles.cardInfo, commonStyles.defaultFont]}>
+            {`${card.expiration_month}/${(card.expiration_year as number) % 100}`}
+          </Text>
+        </View>
+      </>
+    </TouchableHighlight>
   );
 };
 
