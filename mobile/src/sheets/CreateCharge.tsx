@@ -7,10 +7,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import DefaultActionSheet from "components/DefaultActionSheet";
 import PrimaryButton from "components/PrimaryButton";
 import TextInput from "components/TextInput";
+import { useOmise } from "contexts/OmiseProvider";
+import useCreateCharge from "hooks/omise/useCreateCharge";
 import * as yup from "yup";
-
-import { useOmise } from "../contexts/OmiseProvider";
-import useCreateCharge from "../hooks/omise/useCreateCharge";
 
 const validationSchema = yup.object().shape({
   payAmount: yup
@@ -47,13 +46,19 @@ const CreateCharge = (props: SheetProps<"CreateChargeSheet">) => {
         Toast.show({
           type: "error",
           text1: "Charge error",
-          text2: error.response?.data.message || error.message
+          text2: error.response?.data.message || error.message,
+          props: {
+            swipeable: true
+          }
         });
       },
       onSuccess: () => {
         Toast.show({
           type: "success",
-          text1: `Pay amount submitted: ${formValues.payAmount}`
+          text1: `Pay amount submitted: ${formValues.payAmount}`,
+          props: {
+            swipeable: true
+          }
         });
       },
       onSettled: () => {

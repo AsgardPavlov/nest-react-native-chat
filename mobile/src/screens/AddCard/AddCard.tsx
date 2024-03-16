@@ -67,7 +67,10 @@ const AddCard = () => {
     Toast.show({
       type: "error",
       text1: errorType,
-      text2: error.response?.data.message || error.message
+      text2: error.response?.data.message || error.message,
+      props: {
+        swipeable: true
+      }
     });
   };
 

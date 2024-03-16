@@ -44,7 +44,10 @@ const CreateCustomer = () => {
       onError: (error) => {
         Toast.show({
           type: "error",
-          text1: error.response?.data.message || error.message
+          text1: error.response?.data.message || error.message,
+          props: {
+            swipeable: true
+          }
         });
       },
       onSuccess: (res) => {
@@ -53,7 +56,10 @@ const CreateCustomer = () => {
         navigation.navigate("AddCard");
         Toast.show({
           type: "success",
-          text1: "Account successfully created"
+          text1: "Account successfully created",
+          props: {
+            swipeable: true
+          }
         });
       }
     });
