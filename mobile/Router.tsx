@@ -57,7 +57,11 @@ const Router = () => {
           ...commonStyles.defaultFontBold,
           fontSize: fontPixel(17)
         },
-        headerShadowVisible: false
+        headerShadowVisible: false,
+        contentStyle: {
+          paddingTop: 17,
+          paddingBottom: 17
+        }
       })}
     >
       {Object.entries(routes).map(([name, screen]) => (

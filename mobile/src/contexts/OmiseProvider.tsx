@@ -5,7 +5,8 @@ import { customer } from "types/generated";
 interface OmiseContextProps {
   setCustomerId: React.Dispatch<React.SetStateAction<string | null>>;
   customer: customer | undefined;
-  isLoading: boolean;
+  isCustomerLoading: boolean;
+  refetchCutomer: () => void;
 }
 
 export const OmiseContext = createContext<OmiseContextProps>(
@@ -23,12 +24,14 @@ export function useOmise() {
 export const OmiseProvider = ({ children }: { children: React.ReactNode }) => {
   const [customerId, setCustomerId] = useState<string | null>(null);
 
-  const { data, isLoading } = useRetrieveCustomer(customerId);
+  const { data, refetch, isLoading, isRefetching, isFetching } =
+    useRetrieveCustomer(customerId);
 
   const value = {
     setCustomerId,
     customer: data?.data,
-    isLoading
+    isCustomerLoading: isLoading || isRefetching || isFetching,
+    refetchCutomer: refetch
   };
 
   return (
