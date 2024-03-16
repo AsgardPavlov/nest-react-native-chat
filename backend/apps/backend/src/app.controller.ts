@@ -1,12 +1,21 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Inject } from '@nestjs/common';
 import { AppService } from './app.service';
+import { ClientProxy } from '@nestjs/microservices';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    @Inject('CHAT_SERVICE') private chatService: ClientProxy,
+  ) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  async getMessages() {
+    return this.chatService.send(
+      {
+        cmd: 'get-messages',
+      },
+      {},
+    );
   }
 }
