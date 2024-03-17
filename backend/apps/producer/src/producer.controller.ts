@@ -1,11 +1,11 @@
 import { Controller, Get, Inject } from '@nestjs/common';
-import { AppService } from './app.service';
+import { ProducerService } from './producer.service';
 import { ClientProxy } from '@nestjs/microservices';
 
 @Controller()
-export class AppController {
+export class ProducerController {
   constructor(
-    private readonly appService: AppService,
+    private readonly appService: ProducerService,
     @Inject('CHAT_SERVICE') private chatService: ClientProxy,
   ) {}
 

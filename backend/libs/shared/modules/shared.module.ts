@@ -1,16 +1,17 @@
 import { Module } from '@nestjs/common';
-import { ChatController } from './chat.controller';
-import { ChatService } from './chat.service';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    EventEmitterModule.forRoot({
+      newListener: false,
+    }),
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: './.env',
     }),
   ],
-  controllers: [ChatController],
-  providers: [ChatService],
+  exports: [EventEmitterModule],
 })
-export class ChatModule {}
+export class SharedModule {}
