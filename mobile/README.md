@@ -1,23 +1,28 @@
-# Chat App Setup Guide
-
-This guide will help you set up and run the Chat App project on your local development environment. The project is built with Expo, a framework for building universal React applications, and it uses various libraries for navigation, form handling, and API interactions.
+# Mobile Setup Guide
 
 ## Prerequisites
 
-- Node.js (version 14 or higher)
-- npm (version 6 or higher) or yarn
-- Expo CLI (version 4 or higher)
-- A mobile device or emulator for running the app
+Before you begin, ensure your development environment meets the following requirements:
 
-## Step 1: Set Up Environment Variables
+- **Node.js**: Version 14 or higher. Node.js is a JavaScript runtime that allows you to run JavaScript on your server or your machine.
+- **npm or yarn**: Version 6 or higher. These are package managers for the JavaScript programming language. You can use either npm or yarn, but you'll need to have one of them installed.
+- **Expo CLI**: Version 4 or higher. Expo is a set of tools, libraries, and services that lets you build native iOS and Android apps by writing JavaScript.
+- **A mobile device or emulator**: You'll need a mobile device or an emulator to run the app. Expo provides a client app, Expo Go, which you can use to run your projects on your device.
 
-First, you need to create a new file named `.env` in the root of your project directory. Add the following content to the file:
+## Step 1: Setting Up Environment Variables
 
+To configure the Chat App with your Omise API credentials, follow these steps:
 
-`EXPO_PUBLIC_OMISE_API_URL=https://api.omise.co
+1. **Create a `.env` File**: In the root directory of your project, create a new file named `.env`.
+
+2. **Add Your Omise API Credentials**: Open the `.env` file and add the following content, replacing `your_public_key_here` and `your_secret_key_here` with your actual Omise public and secret keys:
+
+```dotenv
+EXPO_PUBLIC_OMISE_API_URL=https://api.omise.co
 EXPO_PUBLIC_OMISE_VAULT_API_URL=https://vault.omise.co
 EXPO_PUBLIC_OMISE_PUBLIC_KEY=your_public_key_here
-EXPO_PUBLIC_OMISE_SECRET_KEY=your_secret_key_here`
+EXPO_PUBLIC_OMISE_SECRET_KEY=your_secret_key_here
+```
 
 Replace `your_public_key_here` and `your_secret_key_here` with your actual Omise public and secret keys.
 
@@ -25,16 +30,25 @@ Replace `your_public_key_here` and `your_secret_key_here` with your actual Omise
 
 Install the project dependencies:
 
-`yarn install`
+```bash
+yarn install
+```
 
-The Expo CLI will open a new browser window with a QR code. Scan this QR code with the Expo Go app on your mobile device to run the app.
 
-## Step 3: Running on Different Platforms
+After the installation is complete, the Expo CLI will automatically open a new browser window displaying a QR code. Use the Expo Go app on your mobile device to scan this QR code and run the app.
 
-You can run the app on different platforms (Android, iOS) using the following commands:
+## Step 3: Running the App on Different Platforms
 
-- For Android:
-  - `yarn android`
-- For iOS:
-  - `yarn ios`
+The Chat App can be run on both Android and iOS platforms. Use the following commands to run the app on your preferred platform:
 
+- **For Android**:
+
+```bash
+yarn android
+```
+
+- **For iOS**:
+
+```bash
+yarn ios
+```
