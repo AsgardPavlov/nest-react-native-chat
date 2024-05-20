@@ -1,6 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { timeout } from 'rxjs';
 import { CreateMessageDto } from '@app/shared/dtos/CreateMessage.dto';
 import { MessagesRepositoryInterface } from '@app/shared/interfaces';
 

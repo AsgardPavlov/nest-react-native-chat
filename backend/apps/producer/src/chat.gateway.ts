@@ -21,7 +21,6 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   ) {
     this.eventEmitter.on('message.create', (newMessage) => {
       this.server.emit('newMessage', newMessage);
-      console.log('Created 1');
     });
   }
 
