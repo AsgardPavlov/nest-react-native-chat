@@ -48,6 +48,7 @@ const BottomNavigationBar = () => {
         component={Chats}
         options={{
           headerShown: false,
+          title: "Chat",
           tabBarIcon: ({ color, size, focused }) => (
             <ChatBubbleLeftRightIcon
               color={color}

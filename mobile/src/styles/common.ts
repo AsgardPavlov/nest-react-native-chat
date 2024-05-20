@@ -19,8 +19,7 @@ export const commonStyles = StyleSheet.create({
     paddingHorizontal: 20
   },
   screenVerticalPadding: {
-    paddingTop: 14,
-    paddingBottom: 14
+    paddingVertical: 14
   },
   cardShadow: {
     backgroundColor: Colors.WHITE,

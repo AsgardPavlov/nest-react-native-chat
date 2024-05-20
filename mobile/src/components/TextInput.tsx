@@ -6,14 +6,14 @@ import { fontPixel, fontSize } from "utils/font-size-helper";
 
 interface TextInputProps
   extends Omit<React.ComponentProps<typeof RNTextInput>, "style"> {
-  label: string;
+  label?: string;
   error?: string;
 }
 
 const TextInput = ({ label, error, ...props }: TextInputProps) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>{label}</Text>
+      {label && <Text style={styles.label}>{label}</Text>}
       <RNTextInput
         {...props}
         style={styles.input}

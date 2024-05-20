@@ -31,7 +31,7 @@ export default function ScreenWrapper({
     {
       paddingBottom: insets.bottom,
       paddingLeft: insets.left,
-      paddingRight: insets.left
+      paddingRight: insets.right
     }
   ];
 
@@ -41,12 +41,13 @@ export default function ScreenWrapper({
         <ScrollView
           {...rest}
           contentContainerStyle={[
+            { flexGrow: 1 },
             contentContainerStyle,
             commonStyles.screenHorizontalPadding
           ]}
           keyboardShouldPersistTaps="always"
           alwaysBounceVertical={false}
-          showsVerticalScrollIndicator={false}
+          // showsVerticalScrollIndicator={false}
           style={[containerStyle, style]}
         >
           {children}
