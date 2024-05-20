@@ -1,5 +1,3 @@
-# Nest React Native Chat Documentation
-
 ## Overview
 
 This repository presents a sophisticated chat application developed using NestJS for the backend, React Native for the frontend, and RabbitMQ for managing real-time messaging queues. The application employs a Publish-Subscribe (Pub/Sub) architecture, enabling efficient and scalable communication between users.
@@ -19,7 +17,10 @@ This repository presents a sophisticated chat application developed using NestJS
 
 ## Get Started
 
-- [Backend Setup](https://github.com/AsgardPavlov/nest-react-native-chat/blob/main/backend/README.md)
-- [Mobile Setup](https://github.com/AsgardPavlov/nest-react-native-chat/blob/main/mobile/README.md)
+- [Backend](https://github.com/AsgardPavlov/nest-react-native-chat/blob/main/backend/README.md)
+- [Mobile](https://github.com/AsgardPavlov/nest-react-native-chat/blob/main/mobile/README.md)
+
+
+## Demo Video
 
 https://github.com/AsgardPavlov/nest-react-native-chat/assets/67398919/59faac77-b579-4598-adbe-fd831f60cdf7
